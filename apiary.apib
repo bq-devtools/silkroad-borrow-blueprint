@@ -5,8 +5,8 @@ HOST: https://borrow-int.bqws.io/
 This module controls the resource loans.
 When a user wants to borrow a resource, he needs to use this module. If the resource is available to be borrowed, the user will get a temporal asset to access it.
 
-## Resource Loans [/v1.0/borrow/{id}/loan/{userId}]
-### Check resource availability [HEAD]
+## Resource Loans [/v1.0/borrow/{id}]
+### Get loanable resource [GET]
 
 ###Errors###
 |Status|Error|Description|
@@ -21,6 +21,23 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 200 (application/json)
 
+        { 
+        "_id" : "53aaadfbe4b005e52b14ff37", 
+        "availableUses" : "256", 
+        "concurrency" : 4,
+        "expire" : ISODate("2025-01-01T00:01:00Z"), 
+        "start" : ISODate("2020-01-01T00:01:00Z"), 
+        "asset" : "53aaadfbe4b005e52b14ff37",
+        "queue" : [ "1513241234", "1325ladf"],
+        "reservations" : [ "1513241234", "1325ladf"],
+        "active" : true, 
+        "loans" : [{
+                    "expire" : ISODate("2025-01-01T00:01:00Z"),
+                    "user" : "1516gsdf245145143"
+                    }] 
+        }
+
+## Resource Loans [/v1.0/borrow/{id}/loan/{userId}]
 ### Apply for a loan [PUT]
 
 ###Errors###
