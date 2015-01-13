@@ -1,1 +1,4 @@
-# silkroad-borrow-blueprint
+silkroad-borrow-blueprint
+============================
+
+SilkRoad borrow API blueprint
