@@ -5,7 +5,22 @@ HOST: https://borrow-int.bqws.io/
 This module controls the resource loans.
 When a user wants to borrow a resource, he needs to use this module. If the resource is available to be borrowed, the user will get a temporal asset to access it.
 
-## Resource Loans [/v1.0/borrow/{id}]
+## Resource Loans [/v1.0/borrow/{id}/loan/{userId}]
+### Check resource availability [HEAD]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource unavailable|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
 ### Apply for a loan [PUT]
 
 ###Errors###
@@ -20,7 +35,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
             Authorization : Bearer {token}
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
 
 ### Return a Loaned Resource [DELETE]
 
