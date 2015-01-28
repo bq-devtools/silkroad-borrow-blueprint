@@ -5,6 +5,32 @@ HOST: https://borrow-int.bqws.io/
 This module controls the resource loans.
 When a user wants to borrow a resource, he needs to use this module. If the resource is available to be borrowed, the user will get a temporal asset to access it.
 
+## Resources Borrowed [/v1.0/borrow/loan/{id}]
+### Get resources borrowed [GET]
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        [{ 
+        "_id" : "53aaadfbe4b005e52b14ff37", 
+        "availableUses" : "256", 
+        "concurrency" : 4,
+        "expire" : ISODate("2025-01-01T00:01:00Z"), 
+        "start" : ISODate("2020-01-01T00:01:00Z"), 
+        "asset" : "53aaadfbe4b005e52b14ff37",
+        "queue" : [ "1513241234", "1325ladf"],
+        "reservations" : [ "1513241234", "1325ladf"],
+        "loanable" : true, 
+        "loans" : [{
+                    "expire" : ISODate("2025-01-01T00:01:00Z"),
+                    "user" : "1516gsdf245145143"
+                    }] 
+        }]
+
 ## Loanable Resources [/v1.0/borrow/{id}]
 ### Get loanable resource [GET]
 
@@ -68,3 +94,52 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             Authorization : Bearer {token}
 
 + Response 204
+
+## Book a Resource [/v1.0/borrow/{id}/book/{userId}]
+### Book an unavailable resource [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the resource can not be book|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
+
+### Cancel resource reservation [DELETE]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204
+
+## Renew a Resource [/v1.0/borrow/{id}/renew/{userId}]
+### Renew a borrowed resource [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the user hasn't resource borrowed |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
