@@ -29,6 +29,35 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
                     "user" : "1516gsdf245145143"
                     }] 
         }]
+        
+        
+## Loanable Resources [/v1.0/borrow]
+### Add loanable resource [POST]
+
+###Parameters###
+|Name|Description|Type|Default|Required
+|----|-----------|----|:-----:|:------:|
+|resourceId|Identifier of resource|string||*|
+|availableUses|Amount of uses that the resource is available|number||*|
+|availableLoans|Amount of loans are available for the resource|number||*
+|expire|expire date|timestamp||*|
+|start|start date|timestamp||*|
+|asset|asset asigned to the resource|string||*|
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 201 (application/json)
+
+        + Header
+            Location: https://silkroad/borrow/123
 
 ## Loanable Resources [/v1.0/borrow/{id}]
 ### Get loanable resource [GET]
