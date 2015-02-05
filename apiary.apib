@@ -5,32 +5,6 @@ HOST: https://borrow-int.bqws.io/
 This module controls the resource loans.
 When a user wants to borrow a resource, he needs to use this module. If the resource is available to be borrowed, the user will get a temporal asset to access it.
 
-## Resources Borrowed [/v1.0/borrow/loan/{userId}]
-### Get resources borrowed [GET]
-
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 200 (application/json)
-
-        [{ 
-        "_id" : "53aaadfbe4b005e52b14ff37",
-        "lenderId" : "QA-Silkroad",
-        "resourceId" : "",
-        "availableUses" : "256", 
-        "availableLoans" : 4,
-        "expire" : ISODate("2025-01-01T00:01:00Z"), 
-        "start" : ISODate("2020-01-01T00:01:00Z"), 
-        "asset" : "53aaadfbe4b005e52b14ff37",
-        "loans" : [{
-                    "expire" : ISODate("2025-01-01T00:01:00Z"),
-                    "user" : "1516gsdf245145143"
-                    }] 
-        }]
-        
-        
 ## Loanable Resources [/v1.0/borrow]
 ### Add loanable resource [POST]
 
@@ -55,10 +29,11 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             Authorization : Bearer {token}
 
 + Response 201 (application/json)
-
-        + Header
+    + Header
+    
             Location: https://silkroad/borrow/123
 
+        
 ## Loanable Resources [/v1.0/borrow/{id}]
 ### Get loanable resource [GET]
 
@@ -79,7 +54,8 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             {"id":"54d1e4a6ccf2fdefb867ca06",
              "lenderId":"silkroad-qa",
              "resourceId":"resourceId1423041701849",
-             "availableUses":100,"availableLoans":5,
+             "availableUses":100,
+             "availableLoans":5,
              "start":1423041701849,
              "expire":1423041711849,
              "asset":{
@@ -89,8 +65,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             }],
         "loanable":true,
         "usersInWaitingQueue":0}
-
-## Loanable Resources [/v1.0/borrow/{id}]
+        
 ### Delete loanable resource [DELETE]
 
 + Request
@@ -99,7 +74,93 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             Authorization : Bearer {token}
 
 + Response 204 (application/json)
+        
 
+## Resources Borrowed [/v1.0/borrow/loan/{userId}]
+### Get resources borrowed [GET]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|405  |not_allowed|If the userId is wrong |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        [{"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701849",
+             "availableUses":100,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+            }]        
+            
+            
+## Loanable Resources History [/v1.0/borrow/history]
+### Get loanable resources history [GET]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        {"resources":[
+            {"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "userId":"1937djpifoi3142",
+             "resourceId":"resourceId1423041701849",
+             "start":1423041701849,
+             "expire":1423041711849,
+             "freeReturned":true,
+             "freeReturned":true,
+             "type": "RENEW" ]
+        }            
+        
+        
+## Loanable Resources History [/v1.0/borrow/history/{userId}]
+### Get loanable resources history [GET]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|405  |not_allowed|If the userId is wrong |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        {"resources":[
+            {"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "userId":"1937djpifoi3142",
+             "resourceId":"resourceId1423041701849",
+             "start":1423041701849,
+             "expire":1423041711849,
+             "freeReturned":true,
+             "freeReturned":true,
+             "type": "RENEW" ]
+        }            
 
 ## Resource Loans [/v1.0/borrow/{id}/loan/{userId}]
 ### Apply for a loan [PUT]
