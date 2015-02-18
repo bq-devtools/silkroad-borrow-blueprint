@@ -238,6 +238,21 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 
 ## Resource Loans [/v1.0/borrow/{id}/loan/me]
+### Apply for a loan [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the resource can not be borrowed|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
 
 
 ### Return a Loaned Resource [DELETE]
@@ -257,6 +272,19 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 ## Return a Loaned Resource  [/v1.0/borrow/{id}/loan/me]
 
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204
+
 ## Book a Resource [/v1.0/borrow/{id}/book/{userId}]
 ### Book an unavailable resource [PUT]
 
@@ -275,6 +303,21 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 + Response 204 (application/json)
 
 ## Book a Resource [/v1.0/borrow/{id}/book/me]
+### Book an unavailable resource [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the resource can not be book|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
 
 ### Cancel resource reservation [DELETE]
 
@@ -309,6 +352,21 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 + Response 204 (application/json)
 
 ## Renew a Resource [/v1.0/borrow/{id}/renew/me]
+### Renew a borrowed resource [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the user hasn't resource borrowed |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
 
 ## All Booked resources [/v1.0/book]
 ### Get all booked resources [GET]
