@@ -242,3 +242,35 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             Authorization : Bearer {token}
 
 + Response 204 (application/json)
+
+## All Booked resources [/v1.0/book]
+### Get all booked resources [GET]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|405  |not_allowed|If the userId is wrong |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        {"resources":[
+            {"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701849",
+             "availableUses":100,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+            }],
+        "loanable":true,
+        "usersInWaitingQueue":0}
