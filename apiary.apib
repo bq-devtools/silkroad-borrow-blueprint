@@ -76,8 +76,37 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 + Response 204 (application/json)
         
 
-## Resources Borrowed [/v1.0/borrow/loan/{userId}]
-### Get resources borrowed [GET]
+## All Resources Borrowed of user [/v1.0/borrow/loan/{userId}]
+### Get all resources borrowed [GET]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|405  |not_allowed|If the userId is wrong |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        [{"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701849",
+             "availableUses":100,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+            }]   
+            
+# All Resources Borrowed of user logged [/v1.0/borrow/loan/me]
+### Get all resources borrowed [GET]
 
 ###Errors###
 |Status|Error|Description|
@@ -105,6 +134,34 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
                  "period":"P0D"}
             }]        
             
+##Resource Borrowed of user [/v1.0/borrow/{resourceId}/loan/{userId}]
+###resource borrowed [GET]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|405  |not_allowed|If the userId is wrong |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        [{"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701849",
+             "availableUses":100,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+            }]        
             
 ## Loanable Resources History [/v1.0/borrow/history]
 ### Get loanable resources history [GET]
