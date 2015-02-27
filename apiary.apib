@@ -237,8 +237,8 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 + Response 204 (application/json)
 
 
-## Resource Loans [/v1.0/borrow/{id}/loan/me]
-### Apply for a loan [PUT]
+## Resource Loans of logged user [/v1.0/borrow/{id}/loan/me]
+### Apply for a loan of logged user [PUT]
 
 ###Errors###
 |Status|Error|Description|
@@ -270,21 +270,6 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 204
 
-## Return a Loaned Resource  [/v1.0/borrow/{id}/loan/me]
-
-###Errors###
-|Status|Error|Description|
-|------|-----|-----------|
-|401  |unauthorized|If the access_token is not associated with any user|
-|404  |not_found|Resource not found|
-
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 204
-
 ## Book a Resource [/v1.0/borrow/{id}/book/{userId}]
 ### Book an unavailable resource [PUT]
 
@@ -302,8 +287,8 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 204 (application/json)
 
-## Book a Resource [/v1.0/borrow/{id}/book/me]
-### Book an unavailable resource [PUT]
+## Book a Resource of logged user [/v1.0/borrow/{id}/book/me]
+### Book an unavailable resource of logged user [PUT]
 
 ###Errors###
 |Status|Error|Description|
@@ -319,7 +304,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 204 (application/json)
 
-### Cancel resource reservation [DELETE]
+### Cancel resource reservation of logged user [DELETE]
 
 ###Errors###
 |Status|Error|Description|
