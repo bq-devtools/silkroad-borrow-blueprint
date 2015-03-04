@@ -467,7 +467,8 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             Authorization : Bearer {token}
             Accept : (application/json)
 
-+ Response 200 (application/json)
++ Response 200
+
     [Lender][]
 
 ### Update my domain lender [PUT]
@@ -510,11 +511,53 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 ### Get lender by id [GET]
 
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|     |
+|404  |not_found|Lender id not found|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+            Accept : (application/json)
+
++ Response 200
+
+    [Lender][]
+
+
+
 ### Update lender by id [PUT]
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|     |
+
++ Response 200 (application/json)
 
 ### Delete lender by id [DELETE]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|     |
+
++ Response 204 (application/json)
+
+
 
 ## All lenders [/v1.0/lender/all]
 ### Get all lenders [GET]
 
++ Request
+    + Headers
 
+            Authorization : Bearer {token}
+            Accept : (application/json)
+
++ Response 200
+    
+    [Lender][]
+    
