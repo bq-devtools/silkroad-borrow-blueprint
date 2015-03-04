@@ -482,8 +482,23 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 |404  |not_found|Lender not found in your domain|
 
 + Request
+    
+    + Headers
 
-    [Lender][]
+            Authorization : Bearer {token}
+            Content-Type : (application/json)
+            
+    + Body
+
+            {
+            "borrowPeriod": "P5D",
+            "freeReturnPeriod": "P1D",
+            "reservationPeriod": "P1D",
+            "maxConcurrentLoansPerUser": 5,
+            "maxLoansPerUserInMonth": 20,
+            "maxRenewalsPerResource": 2,
+            "maxUsersInWaitingQueue": 100
+            }
 
 + Response 200 (application/json)
    
@@ -500,12 +515,25 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 + Response 204 (application/json)
 
 ### Add a new lender [POST]
-
 + Request
-    + Headers
     
+    + Headers
+
             Authorization : Bearer {token}
-            Accept : (application/json)
+            Content-Type : (application/json)
+            
+    + Body
+
+            {
+            "id": "LenderId",
+            "borrowPeriod": "P5D",
+            "freeReturnPeriod": "P1D",
+            "reservationPeriod": "P1D",
+            "maxConcurrentLoansPerUser": 5,
+            "maxLoansPerUserInMonth": 20,
+            "maxRenewalsPerResource": 2,
+            "maxUsersInWaitingQueue": 100
+            }
 
 + Response 204 
 
@@ -543,6 +571,25 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 |------|-----|-----------|
 |401  |unauthorized|     |
 
++ Request
+    
+    + Headers
+
+            Authorization : Bearer {token}
+            Content-Type : (application/json)
+            
+    + Body
+
+            {
+            "borrowPeriod": "P5D",
+            "freeReturnPeriod": "P1D",
+            "reservationPeriod": "P1D",
+            "maxConcurrentLoansPerUser": 5,
+            "maxLoansPerUserInMonth": 20,
+            "maxRenewalsPerResource": 2,
+            "maxUsersInWaitingQueue": 100
+            }
+            
 + Response 200 (application/json)
 
 ### Delete lender by id [DELETE]
@@ -567,4 +614,25 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 200
     
-    [Lender][]
+        [
+            {
+            "id": "LenderId1"
+            "borrowPeriod": "P5D",
+            "freeReturnPeriod": "P1D",
+            "reservationPeriod": "P1D",
+            "maxConcurrentLoansPerUser": 5,
+            "maxLoansPerUserInMonth": 20,
+            "maxRenewalsPerResource": 2,
+            "maxUsersInWaitingQueue": 100
+            },
+            {
+            "id": "LenderId2"
+            "borrowPeriod": "P5D",
+            "freeReturnPeriod": "P1D",
+            "reservationPeriod": "P1D",
+            "maxConcurrentLoansPerUser": 5,
+            "maxLoansPerUserInMonth": 20,
+            "maxRenewalsPerResource": 2,
+            "maxUsersInWaitingQueue": 100
+            }
+        ]
