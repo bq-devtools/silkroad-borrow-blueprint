@@ -513,6 +513,12 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 + Response 204 (application/json)
 
 ### Add a new lender [POST]
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|     |
+|409  |conflict| When a lender already exists with the same id|
+
 + Request
     
     + Headers
