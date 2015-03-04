@@ -437,6 +437,8 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 # Group Lender API
 
+
+            
 ## Lender [/v1.0/lender]
 + Model (application/json)
 
@@ -450,6 +452,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             "maxRenewalsPerResource": 2,
             "maxUsersInWaitingQueue": 100
         }
+
 
 
 
@@ -478,8 +481,13 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 |401  |unauthorized|     |
 |404  |not_found|Lender not found in your domain|
 
++ Request
+
+    [Lender][]
+
 + Response 200 (application/json)
-    
+   
+   
 
 
 ### Delete my domain lender [DELETE]
@@ -560,4 +568,3 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 + Response 200
     
     [Lender][]
-    
