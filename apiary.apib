@@ -150,7 +150,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 200 (application/json)
 
-        [{"id":"54d1e4a6ccf2fdefb867ca06",
+        {"id":"54d1e4a6ccf2fdefb867ca06",
              "lenderId":"silkroad-qa",
              "resourceId":"resourceId1423041701849",
              "availableUses":100,
@@ -161,7 +161,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
                  "scopes":["scopeTest"],
                  "name":"assetTest",
                  "period":"P0D"}
-            }]        
+        }        
             
 ## Loanable Resources History [/v1.0/borrow/history]
 ### Get loanable resources history [GET]
@@ -207,7 +207,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 200 (application/json)
 
-        {"resources":[
+        [{"resources":[
             {"id":"54d1e4a6ccf2fdefb867ca06",
              "lenderId":"silkroad-qa",
              "userId":"1937djpifoi3142",
@@ -217,7 +217,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
              "freeReturned":true,
              "freeReturned":true,
              "type": "RENEW" ]
-        }            
+        }]
 
 ## Resource Loans [/v1.0/borrow/{id}/loan/{userId}]
 ### Apply for a loan [PUT]
@@ -369,7 +369,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 200 (application/json)
 
-        {"resources":[
+        [{"resources":[
             {"id":"54d1e4a6ccf2fdefb867ca06",
              "lenderId":"silkroad-qa",
              "resourceId":"resourceId1423041701849",
@@ -383,7 +383,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
                  "period":"P0D"}
             }],
         "loanable":true,
-        "usersInWaitingQueue":0}
+        "usersInWaitingQueue":0}]
         
         
 ## All Booked resources of user [/v1.0/book/{userId}]
