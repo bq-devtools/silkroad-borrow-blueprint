@@ -471,7 +471,11 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
     [Lender][]
 
 ### Update my domain lender [PUT]
-
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|     |
+|404  |not_found|Lender not found in your domain|
 
 + Response 200 (application/json)
     
@@ -479,7 +483,28 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 ### Delete my domain lender [DELETE]
 
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|     |
+
++ Response 204 (application/json)
+
 ### Add a new lender [POST]
+
++ Request
+    + Headers
+    
+            Authorization : Bearer {token}
+            Accept : (application/json)
+
++ Response 204 
+
+       + Headers
+    
+            Location : https://borrow-int.bqws.io/v1.0/lender/LenderId
+ 
+
 
 ## Lender by id [/v1.0/lender/{id}]
 
