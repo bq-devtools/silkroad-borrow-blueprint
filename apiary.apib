@@ -437,8 +437,6 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 # Group Lender API
 
-
-            
 ## Lender [/v1.0/lender]
 + Model (application/json)
 
@@ -500,7 +498,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             "maxUsersInWaitingQueue": 100
             }
 
-+ Response 200 (application/json)
++ Response 204
    
    
 
@@ -535,7 +533,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             "maxUsersInWaitingQueue": 100
             }
 
-+ Response 204 
++ Response 201
 
        + Headers
     
@@ -590,7 +588,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             "maxUsersInWaitingQueue": 100
             }
             
-+ Response 200 (application/json)
++ Response 204
 
 ### Delete lender by id [DELETE]
 
@@ -599,7 +597,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 |------|-----|-----------|
 |401  |unauthorized|     |
 
-+ Response 204 (application/json)
++ Response 204 
 
 
 
