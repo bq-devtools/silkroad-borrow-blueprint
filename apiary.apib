@@ -5,6 +5,8 @@ HOST: https://borrow-int.bqws.io/
 This module controls the resource loans.
 When a user wants to borrow a resource, he needs to use this module. If the resource is available to be borrowed, the user will get a temporal asset to access it.
 
+
+
 ## Loanable Resources [/v1.0/borrow]
 ### Add loanable resource [POST]
 
@@ -431,16 +433,49 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
         "usersInWaitingQueue":0}
         
         
-        # Lender [/v1.0/lender]
 
 
 # Group Lender API
 
 ## Lender [/v1.0/lender]
++ Model (application/json)
+
+        {
+            "id": "LenderId",
+            "borrowPeriod": "P5D",
+            "freeReturnPeriod": "P1D",
+            "reservationPeriod": "P1D",
+            "maxConcurrentLoansPerUser": 5,
+            "maxLoansPerUserInMonth": 20,
+            "maxRenewalsPerResource": 2,
+            "maxUsersInWaitingQueue": 100
+        }
+
+
 
 ### Get my domain lender [GET]
 
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|     |
+|404  |not_found|Lender not found in your domain|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+            Accept : (application/json)
+
++ Response 200 (application/json)
+    [Lender][]
+
 ### Update my domain lender [PUT]
+
+
++ Response 200 (application/json)
+    
+
 
 ### Delete my domain lender [DELETE]
 
@@ -456,4 +491,5 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 ## All lenders [/v1.0/lender/all]
 ### Get all lenders [GET]
+
 
