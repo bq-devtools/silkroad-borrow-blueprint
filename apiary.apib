@@ -5,10 +5,10 @@ HOST: https://borrow-int.bqws.io/
 This module controls the resource loans.
 When a user wants to borrow a resource, he needs to use this module. If the resource is available to be borrowed, the user will get a temporal asset to access it.
 
+# Group Loanable Resource
 
-
-## Loanable Resources [/v1.0/borrow]
-### Add loanable resource [POST]
+## Create [/v1.0/borrow]
+### Add a loanable resource [POST]
 
 ###Parameters###
 |Name|Description|Type|Default|Required
@@ -36,8 +36,8 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             Location: https://silkroad/borrow/123
 
         
-## Loanable Resource [/v1.0/borrow/{id}]
-### Get loanable resource [GET]
+## Get and delete [/v1.0/borrow/{id}]
+### Get a loanable resource [GET]
 
 ###Errors###
 |Status|Error|Description|
@@ -68,7 +68,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
         "loanable":true,
         "usersInWaitingQueue":0}
         
-### Delete loanable resource [DELETE]
+### Delete a loanable resource [DELETE]
 
 + Request
     + Headers
@@ -78,93 +78,8 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 + Response 204 (application/json)
         
 
-## All Resources Borrowed of user [/v1.0/borrow/loan/{userId}]
-### Get all resources borrowed [GET]
+# Group Loanable Resource History
 
-###Errors###
-|Status|Error|Description|
-|------|-----|-----------|
-|401  |unauthorized|If the access_token is not associated with any user|
-|405  |not_allowed|If the userId is wrong |
-
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 200 (application/json)
-
-        [{"id":"54d1e4a6ccf2fdefb867ca06",
-             "lenderId":"silkroad-qa",
-             "resourceId":"resourceId1423041701849",
-             "availableUses":100,
-             "availableLoans":5,
-             "start":1423041701849,
-             "expire":1423041711849,
-             "asset":{
-                 "scopes":["scopeTest"],
-                 "name":"assetTest",
-                 "period":"P0D"}
-            }]   
-            
-# All Resources Borrowed of user logged [/v1.0/borrow/loan/me]
-### Get all resources borrowed [GET]
-
-###Errors###
-|Status|Error|Description|
-|------|-----|-----------|
-|401  |unauthorized|If the access_token is not associated with any user|
-
-
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 200 (application/json)
-
-        [{"id":"54d1e4a6ccf2fdefb867ca06",
-             "lenderId":"silkroad-qa",
-             "resourceId":"resourceId1423041701849",
-             "availableUses":100,
-             "availableLoans":5,
-             "start":1423041701849,
-             "expire":1423041711849,
-             "asset":{
-                 "scopes":["scopeTest"],
-                 "name":"assetTest",
-                 "period":"P0D"}
-            }]        
-            
-##Resource Borrowed of user [/v1.0/borrow/{resourceId}/loan/{userId}]
-###resource borrowed [GET]
-
-###Errors###
-|Status|Error|Description|
-|------|-----|-----------|
-|401  |unauthorized|If the access_token is not associated with any user|
-|405  |not_allowed|If the userId is wrong |
-
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 200 (application/json)
-
-        {"id":"54d1e4a6ccf2fdefb867ca06",
-             "lenderId":"silkroad-qa",
-             "resourceId":"resourceId1423041701849",
-             "availableUses":100,
-             "availableLoans":5,
-             "start":1423041701849,
-             "expire":1423041711849,
-             "asset":{
-                 "scopes":["scopeTest"],
-                 "name":"assetTest",
-                 "period":"P0D"}
-        }        
-            
 ## Loanable Resources History [/v1.0/borrow/history]
 ### Get loanable resources history [GET]
 
@@ -192,8 +107,9 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
              "type": "RENEW" ]
         }            
         
-        
-## Loanable Resources History for a user [/v1.0/borrow/history/{userId}]
+      
+
+## Loanable Resources History of a user [/v1.0/borrow/history/{userId}]
 ### Get loanable resources history [GET]
 
 ###Errors###
@@ -221,141 +137,99 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
              "type": "RENEW" ]
         }]
 
-## Resource Loans [/v1.0/borrow/{id}/loan/{userId}]
-### Apply for a loan [PUT]
+
+## Loanable Resources History of logged user [/v1.0/borrow/history/me]
+### Get loanable resources history [GET]
 
 ###Errors###
 |Status|Error|Description|
 |------|-----|-----------|
 |401  |unauthorized|If the access_token is not associated with any user|
-|404  |not_found|Resource not found|
-|409  |conflict|If the resource can not be borrowed|
+|405  |not_allowed|If the userId is wrong |
 
 + Request
     + Headers
 
             Authorization : Bearer {token}
 
-+ Response 204 (application/json)
++ Response 200 (application/json)
 
+        [{"resources":[
+            {"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "userId":"1937djpifoi3142",
+             "resourceId":"resourceId1423041701849",
+             "start":1423041701849,
+             "expire":1423041711849,
+             "freeReturned":true,
+             "freeReturned":true,
+             "type": "RENEW" ]
+        }]
 
-## Resource Loans of logged user [/v1.0/borrow/{id}/loan/me]
-### Apply for a loan of logged user [PUT]
+# Group Loanable Resource Loans
+## List all Loanable Resources lent to a user [/v1.0/borrow/loan/{userId}]
+### Get all lent resources [GET]
 
 ###Errors###
 |Status|Error|Description|
 |------|-----|-----------|
 |401  |unauthorized|If the access_token is not associated with any user|
-|404  |not_found|Resource not found|
-|409  |conflict|If the resource can not be borrowed|
+|405  |not_allowed|If the userId is wrong |
 
 + Request
     + Headers
 
             Authorization : Bearer {token}
 
-+ Response 204 (application/json)
++ Response 200 (application/json)
 
-
-### Return a Loaned Resource [DELETE]
+        [{"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701849",
+             "availableUses":100,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+            }]   
+            
+            
+## List all Loanable Resources lent to a user [/v1.0/borrow/loan/me]
+### Get all lent resources [GET]
 
 ###Errors###
 |Status|Error|Description|
 |------|-----|-----------|
 |401  |unauthorized|If the access_token is not associated with any user|
-|404  |not_found|Resource not found|
+
 
 + Request
     + Headers
 
             Authorization : Bearer {token}
 
-+ Response 204
++ Response 200 (application/json)
 
-## Book a Resource [/v1.0/borrow/{id}/book/{userId}]
-### Book an unavailable resource [PUT]
+        [{"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701849",
+             "availableUses":100,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+            }]        
+            
 
-###Errors###
-|Status|Error|Description|
-|------|-----|-----------|
-|401  |unauthorized|If the access_token is not associated with any user|
-|404  |not_found|Resource not found|
-|409  |conflict|If the resource can not be book|
+# Group Loanable Resource Reservations
 
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 204 (application/json)
-
-## Book a Resource of logged user [/v1.0/borrow/{id}/book/me]
-### Book an unavailable resource of logged user [PUT]
-
-###Errors###
-|Status|Error|Description|
-|------|-----|-----------|
-|401  |unauthorized|If the access_token is not associated with any user|
-|404  |not_found|Resource not found|
-|409  |conflict|If the resource can not be book|
-
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 204 (application/json)
-
-### Cancel resource reservation of logged user [DELETE]
-
-###Errors###
-|Status|Error|Description|
-|------|-----|-----------|
-|401  |unauthorized|If the access_token is not associated with any user|
-|404  |not_found|Resource not found|
-
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 204
-
-## Renew a Resource [/v1.0/borrow/{id}/renew/{userId}]
-### Renew a borrowed resource [PUT]
-
-###Errors###
-|Status|Error|Description|
-|------|-----|-----------|
-|401  |unauthorized|If the access_token is not associated with any user|
-|404  |not_found|Resource not found|
-|409  |conflict|If the user hasn't resource borrowed |
-
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 204 (application/json)
-
-## Renew a Resource [/v1.0/borrow/{id}/renew/me]
-### Renew a borrowed resource [PUT]
-
-###Errors###
-|Status|Error|Description|
-|------|-----|-----------|
-|401  |unauthorized|If the access_token is not associated with any user|
-|404  |not_found|Resource not found|
-|409  |conflict|If the user hasn't resource borrowed |
-
-+ Request
-    + Headers
-
-            Authorization : Bearer {token}
-
-+ Response 204 (application/json)
-
-## All Booked resources [/v1.0/book]
+## List all booked resources [/v1.0/book]
 ### Get all booked resources [GET]
 
 ###Errors###
@@ -388,8 +262,54 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
         "usersInWaitingQueue":0}]
         
         
-## All Booked resources of user [/v1.0/book/{userId}]
-### Get all booked resources of user [GET]
+## List all resources booked by user [/v1.0/book/{userId}]
+### Get all resources booked by user [GET]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        {"resources":[
+            {"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701849",
+             "availableUses":100,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+            },
+            {"id":"54d1e4a6ccf2fdeasce54assh",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701845",
+             "availableUses":10,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+            }],
+        "loanable":true,
+        "usersInWaitingQueue":0}
+        
+        
+
+## List all resources booked by the logged user [/v1.0/book/me]
+### Get all resources booked by the logged user [GET]
 
 ###Errors###
 |Status|Error|Description|
@@ -435,7 +355,189 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
         
 
 
-# Group Lender API
+            
+# Group Loan
+
+##User loan [/v1.0/borrow/{id}/loan/{userId}]
+
+### Apply for a loan [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the resource can not be borrowed|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
+
+###Get a lent resource [GET]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|405  |not_allowed|If the userId is wrong |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        {"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701849",
+             "availableUses":100,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+        }  
+        
+
+##Logged User loan [/v1.0/borrow/{id}/loan/me]
+
+### Apply for a loan [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the resource can not be borrowed|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
+
+###Get a lent resource [GET]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|405  |not_allowed|If the userId is wrong |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 200 (application/json)
+
+        {"id":"54d1e4a6ccf2fdefb867ca06",
+             "lenderId":"silkroad-qa",
+             "resourceId":"resourceId1423041701849",
+             "availableUses":100,
+             "availableLoans":5,
+             "start":1423041701849,
+             "expire":1423041711849,
+             "asset":{
+                 "scopes":["scopeTest"],
+                 "name":"assetTest",
+                 "period":"P0D"}
+        }  
+
+
+# Group Loan Renewal
+## Renew a loan of a user [/v1.0/borrow/{id}/renew/{userId}]
+### Renew a loan of a user [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the user hasn't resource borrowed |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
+
+## Renew a loan of the logged user [/v1.0/borrow/{id}/renew/me]
+### Renew a loan of the logged user [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the user hasn't resource borrowed |
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
+
+# Group Loan Reservation
+## Book a loanable resource for a user [/v1.0/borrow/{id}/book/{userId}]
+### Book a loananble resource for a user [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the resource can not be book|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
+
+## Book a loanable resource for the logged user [/v1.0/borrow/{id}/book/me]
+### Book a loanable resource for the logged user [PUT]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+|409  |conflict|If the resource can not be book|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204 (application/json)
+
+### Cancel a reservation of the logged user [DELETE]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204
+
+# Group Lender
 
 ## Lender [/v1.0/lender]
 + Model (application/json)
@@ -450,9 +552,6 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             "maxRenewalsPerResource": 2,
             "maxUsersInWaitingQueue": 100
         }
-
-
-
 
 ### Get my domain lender [GET]
 
@@ -500,8 +599,6 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 204
    
-   
-
 
 ### Delete my domain lender [DELETE]
 
@@ -545,7 +642,6 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
     
             Location : https://borrow-int.bqws.io/v1.0/lender/LenderId
  
-
 
 ## Lender by id [/v1.0/lender/{id}]
 
