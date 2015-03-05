@@ -39,6 +39,30 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 ## Get and delete [/v1.0/borrow/{id}]
 ### Get a loanable resource [GET]
 
+###Response Fields###
+|Name|Description|Type|
+|------|-----|-----------|
+|loanable|Indicates if the resource is loanable|boolean|
+|usersInWaitingQueue|Number of users waiting for borrowing the resource|interger|
+|resources|array of resources loanables|Array|
+|resources.id|Id of the resource|String|
+|resources.lenderId|Id of the lender that provides the resource|String|
+|resources.resourceId||String|
+|resources.availableUses|Number of available uses of the resource|integer|
+|resources.availableLoans|Number of available loans of the resource|integer|
+|resources.start|Date when the resource begins to be available (milliseconds)|timestamp|
+|resources.expire|Date when the resource expires (milliseconds)|timestamp|
+|resources.asset|Asset that provides the loan of the resource|String|
+|resources.asset.scopes|Scopes of the asset|Array|,
+|resources.asset.name|Name of the asset|String|
+|resources.loans|actual loans of the resource|Array|
+|resources.loans.userId|Id of the borrower|String|
+|resources.loans.start|Date when the loan starts (milliseconds)|timestamp|
+|resources.loans.expire|Date when the loan expires (milliseconds)|timestamp|
+|resources.loans.pendingConfirmation|Indicates if the loan is pending of confirmation|boolean|
+|resources.loans.availableRenewals|Number of available renewals of the loan|int|
+|resources.loans.type|Indicates if the loan is a BORROW or a RENEW|String|
+
 ###Errors###
 |Status|Error|Description|
 |------|-----|-----------|
