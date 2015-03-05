@@ -36,7 +36,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             Location: https://silkroad/borrow/123
 
         
-## Get and delete [/v1.0/borrow/{id}]
+## Get [/v1.0/borrow/{resourceId}]
 ### Get a loanable resource [GET]
 
 ###Response Fields###
@@ -44,9 +44,10 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 |------|-----|-----------|
 |loanable|Indicates if the resource is loanable|boolean|
 |usersInWaitingQueue|Number of users waiting for borrowing the resource|interger|
-|resources|array of resources loanables|Array|
-|resources.resourceId|Id of the resource|String|
+|resources|array of licenses of the resource|Array|
+|resources.id|Id of the license|String|
 |resources.lenderId|Id of the lender that provides the resource|String|
+|resources.resourceId|Id of the loanable resource|String|
 |resources.availableUses|Number of available uses of the resource|integer|
 |resources.availableLoans|Number of available loans of the resource|integer|
 |resources.start|Date when the resource begins to be available (milliseconds)|timestamp|
@@ -91,7 +92,8 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
         "loanable":true,
         "usersInWaitingQueue":0}
         
-### Delete a loanable resource [DELETE]
+## Delete [/v1.0/borrow/{licenseId}]
+### Delete a license of a loanable resource [DELETE]
 
 + Request
     + Headers
@@ -381,7 +383,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
             
 # Group Loan
 
-##User loan [/v1.0/borrow/{id}/loan/{userId}]
+##User loan [/v1.0/borrow/{resourceId}/loan/{userId}]
 
 ### Apply for a loan [PUT]
 
@@ -428,7 +430,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
         }  
         
 
-##Logged User loan [/v1.0/borrow/{id}/loan/me]
+##Logged User loan [/v1.0/borrow/{resourceId}/loan/me]
 
 ### Apply for a loan [PUT]
 
@@ -476,7 +478,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 
 # Group Loan Renewal
-## Renew a loan of a user [/v1.0/borrow/{id}/renew/{userId}]
+## Renew a loan of a user [/v1.0/borrow/{resourceId}/renew/{userId}]
 ### Renew a loan of a user [PUT]
 
 ###Errors###
@@ -493,7 +495,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 204 (application/json)
 
-## Renew a loan of the logged user [/v1.0/borrow/{id}/renew/me]
+## Renew a loan of the logged user [/v1.0/borrow/{resourceId}/renew/me]
 ### Renew a loan of the logged user [PUT]
 
 ###Errors###
@@ -511,7 +513,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 + Response 204 (application/json)
 
 # Group Loan Reservation
-## Book a loanable resource for a user [/v1.0/borrow/{id}/book/{userId}]
+## Book a loanable resource for a user [/v1.0/borrow/{resourceId}/book/{userId}]
 ### Book a loananble resource for a user [PUT]
 
 ###Errors###
@@ -528,7 +530,7 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 204 (application/json)
 
-## Book a loanable resource for the logged user [/v1.0/borrow/{id}/book/me]
+## Book a loanable resource for the logged user [/v1.0/borrow/{resourceId}/book/me]
 ### Book a loanable resource for the logged user [PUT]
 
 ###Errors###
