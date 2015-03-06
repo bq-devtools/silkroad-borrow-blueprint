@@ -530,6 +530,21 @@ When a user wants to borrow a resource, he needs to use this module. If the reso
 
 + Response 204 (application/json)
 
+### Cancel a reservation [DELETE]
+
+###Errors###
+|Status|Error|Description|
+|------|-----|-----------|
+|401  |unauthorized|If the access_token is not associated with any user|
+|404  |not_found|Resource not found|
+
++ Request
+    + Headers
+
+            Authorization : Bearer {token}
+
++ Response 204
+
 ## Book a loanable resource for the logged user [/v1.0/borrow/{resourceId}/book/me]
 ### Book a loanable resource for the logged user [PUT]
 
